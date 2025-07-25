@@ -4,6 +4,7 @@ const middleware = jsonServer.defaults();
 const init = require("./services");
 const walk = require("./utils/walk");
 const cors = require("./utils/cors");
+const startPinging = require("./utils/ping");
 
 let ang;
 
@@ -25,6 +26,7 @@ walk("./services", function (err, results) {
 
     server.listen(3004, function () {
       console.log("JSON Server is running on 3004");
+      startPinging();
     });
   }
 });
