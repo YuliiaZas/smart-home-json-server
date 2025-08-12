@@ -15,4 +15,11 @@ function getUserByToken(req, res, server) {
   });
 }
 
-module.exports = { getUserByToken };
+function requireAuth(req, res, next, server) {
+  const user = getUserByToken(req, res, server);
+  if (!user) return res.status(401).send("Unauthorized");
+  req.user = user;
+  next();
+}
+
+module.exports = { getUserByToken, requireAuth };

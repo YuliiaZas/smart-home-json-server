@@ -16,12 +16,12 @@
           "urlencoded": [
             {
               "key": "userName",
-              "value": "",
+              "value": "Dale",
               "type": "text"
             },
             {
               "key": "password",
-              "value": "",
+              "value": "consequat",
               "type": "text"
             }
           ]
@@ -43,7 +43,7 @@
         "header": [
           {
             "key": "Authorization",
-            "value": "Bearer",
+            "value": "Bearer 58ebfdf772a49d09aeee10a8",
             "type": "text"
           }
         ],
@@ -64,7 +64,7 @@
         "header": [
           {
             "key": "Authorization",
-            "value": "Bearer",
+            "value": "Bearer 58ebfdf772a49d09aeee10a8",
             "type": "text"
           }
         ],
@@ -85,7 +85,7 @@
         "header": [
           {
             "key": "Authorization",
-            "value": "Bearer",
+            "value": "Bearer 58ebfdf772a49d09aeee10a8",
             "type": "text"
           }
         ],
@@ -95,6 +95,138 @@
           "host": ["localhost"],
           "port": "3004",
           "path": ["api", "dashboards", "overview"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Create New Dashboard",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer 58ebfdf772a49d09aeee10a8",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"id\": \"test\",\n    \"title\": \"Test Dashboard\",\n    \"icon\": \"test\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:3004/api/dashboards",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3004",
+          "path": ["api", "dashboards"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Update Dashboard by ID",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer 58ebfdf772a49d09aeee10a8",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"tabs\": [\n        {\n            \"id\": \"overview\",\n            \"title\": \"Overview\",\n            \"cards\": [\n                {\n                    \"id\": \"indoor-rooms\",\n                    \"title\": \"Rooms\",\n                    \"layout\": \"verticalLayout\",\n                    \"items\": [\n                        {\n                            \"type\": \"sensor\",\n                            \"icon\": \"co2\",\n                            \"label\": \"CO2 Sensor\",\n                            \"value\": {\n                                \"amount\": 520,\n                                \"unit\": \"ppm\"\n                            },\n                            \"id\": \"b1a36985-927a-47d0-8cf4-7edf5eca8528\"\n                        },\n                        {\n                            \"type\": \"sensor\",\n                            \"icon\": \"water_drop\",\n                            \"label\": \"Humidity\",\n                            \"value\": {\n                                \"amount\": 45,\n                                \"unit\": \"%\"\n                            },\n                            \"id\": \"459aa78c-1029-42ca-b2ce-5108e2ddb14c\"\n                        }\n                    ]\n                },\n                {\n                    \"id\": \"bathroom-motion\",\n                    \"title\": \"Bathroom\",\n                    \"layout\": \"singleDevice\",\n                    \"items\": [\n                        {\n                            \"type\": \"sensor\",\n                            \"icon\": \"motion_photos_on\",\n                            \"label\": \"Motion Sensor\",\n                            \"value\": {\n                                \"amount\": 1,\n                                \"unit\": \"detected\"\n                            },\n                            \"id\": \"2befa9e8-8ce4-4d4f-94b5-3e5deea5953a\"\n                        }\n                    ]\n                },\n                {\n                    \"id\": \"living-room-mixed\",\n                    \"title\": \"Living Room\",\n                    \"layout\": \"verticalLayout\",\n                    \"items\": [\n                        {\n                            \"type\": \"device\",\n                            \"icon\": \"lightbulb\",\n                            \"label\": \"Floor Lamp\",\n                            \"state\": true,\n                            \"id\": \"70ffe6b5-b785-48d8-977e-77928b5608e0\"\n                        },\n                        {\n                            \"type\": \"device\",\n                            \"icon\": \"power\",\n                            \"label\": \"TV Socket\",\n                            \"state\": false,\n                            \"id\": \"ba0ab237-f943-46fe-a47e-408d07c82978\"\n                        },\n                        {\n                            \"type\": \"sensor\",\n                            \"icon\": \"thermostat\",\n                            \"label\": \"Temperature\",\n                            \"value\": {\n                                \"amount\": 23.5,\n                                \"unit\": \"°C\"\n                            },\n                            \"id\": \"f4f98272-7883-46f1-bb8e-9efd7b9069c3\"\n                        },\n                        {\n                            \"type\": \"sensor\",\n                            \"icon\": \"co2\",\n                            \"label\": \"CO2 Sensor\",\n                            \"value\": {\n                                \"amount\": 610,\n                                \"unit\": \"ppm\"\n                            },\n                            \"id\": \"93467299-8941-4174-ad60-2601209a15dc\"\n                        }\n                    ]\n                }\n            ]\n        },\n        {\n            \"id\": \"lights\",\n            \"title\": \"Lights\",\n            \"cards\": [\n                {\n                    \"id\": \"kitchen-light\",\n                    \"title\": \"Kitchen\",\n                    \"layout\": \"singleDevice\",\n                    \"items\": [\n                        {\n                            \"type\": \"device\",\n                            \"icon\": \"lightbulb\",\n                            \"label\": \"Ceiling Light\",\n                            \"state\": true,\n                            \"id\": \"65e5ce06-70ab-412e-ad90-aa8a7641d783\"\n                        }\n                    ]\n                },\n                {\n                    \"id\": \"corridor-light\",\n                    \"title\": \"Corridor\",\n                    \"layout\": \"singleDevice\",\n                    \"items\": [\n                        {\n                            \"type\": \"device\",\n                            \"icon\": \"lightbulb\",\n                            \"label\": \"Ceiling Light\",\n                            \"state\": false,\n                            \"id\": \"d25866c5-3527-46b2-8944-a81299e41555\"\n                        }\n                    ]\n                },\n                {\n                    \"id\": \"living-room-light\",\n                    \"title\": \"Living Room\",\n                    \"layout\": \"singleDevice\",\n                    \"items\": [\n                        {\n                            \"type\": \"device\",\n                            \"icon\": \"lightbulb\",\n                            \"label\": \"Chandelier\",\n                            \"state\": true,\n                            \"id\": \"285dcbf4-626a-415d-8c9c-426644a987c7\"\n                        }\n                    ]\n                },\n                {\n                    \"id\": \"bedroom-light\",\n                    \"title\": \"Bedroom\",\n                    \"layout\": \"singleDevice\",\n                    \"items\": [\n                        {\n                            \"type\": \"device\",\n                            \"icon\": \"lightbulb\",\n                            \"label\": \"Main Light\",\n                            \"state\": true,\n                            \"id\": \"d80bcbe2-ff9f-499b-879d-ba04ff4acbaf\"\n                        }\n                    ]\n                },\n                {\n                    \"id\": \"bathroom-light\",\n                    \"title\": \"Bathroom\",\n                    \"layout\": \"singleDevice\",\n                    \"items\": [\n                        {\n                            \"type\": \"device\",\n                            \"icon\": \"lightbulb\",\n                            \"label\": \"Ceiling Light\",\n                            \"state\": false,\n                            \"id\": \"89bc9f6a-a3ee-4d5f-816d-8fa72dc57150\"\n                        }\n                    ]\n                }\n            ]\n        }\n    ]\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:3004/api/dashboards/overview",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3004",
+          "path": ["api", "dashboards", "overview"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Delete Dashboard by ID",
+      "request": {
+        "method": "DELETE",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer 58ebfdf772a49d09aeee10a8",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "http://localhost:3004/api/dashboards/security",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3004",
+          "path": ["api", "dashboards", "security"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get Devices",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer 58ebfdf772a49d09aeee10a8",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "http://localhost:3004/api/devices",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3004",
+          "path": ["api", "devices"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Update device state",
+      "request": {
+        "method": "PATCH",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer 58ebfdf772a49d09aeee10a8",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{ \"state\": false }",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:3004/api/devices/70ffe6b5-b785-48d8-977e-77928b5608e0",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3004",
+          "path": ["api", "devices", "70ffe6b5-b785-48d8-977e-77928b5608e0"]
         }
       },
       "response": []

@@ -20,8 +20,9 @@
                   "label": "Temperature",
                   "value": {
                     "amount": 18.5,
-                    "unit": "\u00b0C"
-                  }
+                    "unit": "°C"
+                  },
+                  "id": "309520b3-883a-4755-b714-abb6a726a00b"
                 },
                 {
                   "type": "sensor",
@@ -30,7 +31,8 @@
                   "value": {
                     "amount": 72,
                     "unit": "%"
-                  }
+                  },
+                  "id": "2b963ffa-5427-46ff-8190-26bc9c3e390b"
                 },
                 {
                   "type": "sensor",
@@ -39,7 +41,8 @@
                   "value": {
                     "amount": 1,
                     "unit": "clear"
-                  }
+                  },
+                  "id": "dc230bab-eb03-4b47-a12c-66296ab44dd5"
                 }
               ]
             },
@@ -55,7 +58,8 @@
                   "value": {
                     "amount": 520,
                     "unit": "ppm"
-                  }
+                  },
+                  "id": "b1a36985-927a-47d0-8cf4-7edf5eca8528"
                 },
                 {
                   "type": "sensor",
@@ -64,7 +68,8 @@
                   "value": {
                     "amount": 45,
                     "unit": "%"
-                  }
+                  },
+                  "id": "459aa78c-1029-42ca-b2ce-5108e2ddb14c"
                 }
               ]
             },
@@ -80,7 +85,8 @@
                   "value": {
                     "amount": 1,
                     "unit": "detected"
-                  }
+                  },
+                  "id": "2befa9e8-8ce4-4d4f-94b5-3e5deea5953a"
                 }
               ]
             },
@@ -93,13 +99,15 @@
                   "type": "device",
                   "icon": "lightbulb",
                   "label": "Floor Lamp",
-                  "state": true
+                  "state": true,
+                  "id": "70ffe6b5-b785-48d8-977e-77928b5608e0"
                 },
                 {
                   "type": "device",
                   "icon": "power",
                   "label": "TV Socket",
-                  "state": false
+                  "state": false,
+                  "id": "ba0ab237-f943-46fe-a47e-408d07c82978"
                 },
                 {
                   "type": "sensor",
@@ -107,8 +115,9 @@
                   "label": "Temperature",
                   "value": {
                     "amount": 23.5,
-                    "unit": "\u00b0C"
-                  }
+                    "unit": "°C"
+                  },
+                  "id": "f4f98272-7883-46f1-bb8e-9efd7b9069c3"
                 },
                 {
                   "type": "sensor",
@@ -117,7 +126,8 @@
                   "value": {
                     "amount": 610,
                     "unit": "ppm"
-                  }
+                  },
+                  "id": "93467299-8941-4174-ad60-2601209a15dc"
                 }
               ]
             }
@@ -136,7 +146,8 @@
                   "type": "device",
                   "icon": "lightbulb",
                   "label": "Ceiling Light",
-                  "state": true
+                  "state": true,
+                  "id": "65e5ce06-70ab-412e-ad90-aa8a7641d783"
                 }
               ]
             },
@@ -149,7 +160,8 @@
                   "type": "device",
                   "icon": "lightbulb",
                   "label": "Ceiling Light",
-                  "state": false
+                  "state": false,
+                  "id": "d25866c5-3527-46b2-8944-a81299e41555"
                 }
               ]
             },
@@ -162,7 +174,8 @@
                   "type": "device",
                   "icon": "lightbulb",
                   "label": "Chandelier",
-                  "state": true
+                  "state": true,
+                  "id": "285dcbf4-626a-415d-8c9c-426644a987c7"
                 }
               ]
             },
@@ -175,7 +188,8 @@
                   "type": "device",
                   "icon": "lightbulb",
                   "label": "Main Light",
-                  "state": true
+                  "state": true,
+                  "id": "d80bcbe2-ff9f-499b-879d-ba04ff4acbaf"
                 }
               ]
             },
@@ -188,7 +202,8 @@
                   "type": "device",
                   "icon": "lightbulb",
                   "label": "Ceiling Light",
-                  "state": false
+                  "state": false,
+                  "id": "89bc9f6a-a3ee-4d5f-816d-8fa72dc57150"
                 }
               ]
             }
@@ -217,7 +232,8 @@
                   "value": {
                     "amount": 2.5,
                     "unit": "kWh"
-                  }
+                  },
+                  "id": "a7b7fe0b-4f4d-47e6-a6ce-d8ca23db761d"
                 },
                 {
                   "type": "sensor",
@@ -226,7 +242,8 @@
                   "value": {
                     "amount": 1,
                     "unit": "true"
-                  }
+                  },
+                  "id": "e5ff4402-94b9-40e2-a8a7-d77324a448ae"
                 }
               ]
             },
@@ -242,7 +259,8 @@
                   "value": {
                     "amount": 0.8,
                     "unit": "kWh"
-                  }
+                  },
+                  "id": "e4d576c3-e4a1-4f0f-ab7b-99d929879ec4"
                 },
                 {
                   "type": "sensor",
@@ -251,7 +269,8 @@
                   "value": {
                     "amount": 0.5,
                     "unit": "kWh"
-                  }
+                  },
+                  "id": "915433a4-60f7-4d80-8dd2-32d2223a1f92"
                 },
                 {
                   "type": "sensor",
@@ -260,7 +279,8 @@
                   "value": {
                     "amount": 1.2,
                     "unit": "kWh"
-                  }
+                  },
+                  "id": "90cbd532-b820-4c9e-99a6-662b1cf4675a"
                 }
               ]
             }
@@ -289,7 +309,8 @@
                   "value": {
                     "amount": 21.0,
                     "unit": "°C"
-                  }
+                  },
+                  "id": "7fe73cc3-1821-4df2-80a9-b8d1cb5f29f7"
                 },
                 {
                   "type": "sensor",
@@ -298,7 +319,8 @@
                   "value": {
                     "amount": 40,
                     "unit": "%"
-                  }
+                  },
+                  "id": "fe1b95f6-392d-4ff2-b858-7adb33a20416"
                 }
               ]
             },
@@ -314,7 +336,8 @@
                   "value": {
                     "amount": 22.8,
                     "unit": "°C"
-                  }
+                  },
+                  "id": "1f54286a-2368-4b4f-9d10-6d51bfd634dd"
                 },
                 {
                   "type": "sensor",
@@ -323,7 +346,8 @@
                   "value": {
                     "amount": 460,
                     "unit": "ppm"
-                  }
+                  },
+                  "id": "15cf9df6-eba2-42ae-8fb3-c6c0114e28c0"
                 }
               ]
             }
@@ -349,7 +373,8 @@
                   "type": "device",
                   "icon": "door_front",
                   "label": "Door Lock",
-                  "state": true
+                  "state": true,
+                  "id": "d7c20a97-2542-425b-a4ee-53f32914fe4d"
                 }
               ]
             },
@@ -362,7 +387,8 @@
                   "type": "device",
                   "icon": "videocam",
                   "label": "Camera Front",
-                  "state": true
+                  "state": true,
+                  "id": "953de0d3-c2a0-40c2-99cd-e4951a7b0fb7"
                 },
                 {
                   "type": "sensor",
@@ -371,7 +397,8 @@
                   "value": {
                     "amount": 1,
                     "unit": "detected"
-                  }
+                  },
+                  "id": "1c0a8648-be7d-46da-89e4-abe299770b89"
                 }
               ]
             },
@@ -384,7 +411,8 @@
                   "type": "device",
                   "icon": "notifications_active",
                   "label": "Main Alarm",
-                  "state": false
+                  "state": false,
+                  "id": "14ba3ee6-065f-47f0-971f-ce702e05c467"
                 }
               ]
             }
