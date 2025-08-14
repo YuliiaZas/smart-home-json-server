@@ -115,6 +115,45 @@ module.exports = (server) => {
     }
   );
 
+  router.put(
+    "/api/dashboards/:dashboardId/info",
+    (req, res, next) => requireAuth(req, res, next, server),
+    (req, res) => {
+      const { dashboardId } = req.params;
+      const { title, icon } = req.body;
+
+      if (
+        typeof title !== "string" ||
+        typeof icon !== "string" ||
+        !title.trim() ||
+        !icon.trim()
+      ) {
+        return res
+          .status(400)
+          .send("Missing or invalid 'title' or 'icon'");
+      }
+
+      const db = getDb();
+      const dashboards = db.dashboards;
+
+      const found = dashboards.some((d) => d.id === dashboardId);
+      if (!found) {
+        return res.status(404).send("Dashboard not found");
+      }
+
+      const updatedDashboards = dashboards.map((dashboard) =>
+        dashboard.id === dashboardId ? { ...dashboard, title, icon } : dashboard
+      );
+
+      server.db.setState({
+        ...db,
+        dashboards: updatedDashboards,
+      });
+
+      res.status(200).json({ id: dashboardId, title, icon });
+    }
+  );
+
   router.delete(
     "/api/dashboards/:dashboardId",
     (req, res, next) => requireAuth(req, res, next, server),

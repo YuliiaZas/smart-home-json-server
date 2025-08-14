@@ -237,6 +237,31 @@ Returns the full updated dashboard object:
 }
 ```
 
+#### `PUT /api/dashboards/:dashboardId/info`
+
+Replace the title and the icon of an existing dashboard.
+
+Requires `Authorization: Bearer <token>` header.
+
+**Request body:**
+
+```json
+{
+  "title": "Climate",
+  "icon": "device_thermostat",
+}
+```
+
+**Response:**
+
+```json
+{
+  "id": "climate",
+  "title": "Climate",
+  "icon": "device_thermostat",
+}
+```
+
 #### `DELETE /api/dashboards/:dashboardId`
 
 Delete the specified dashboard.

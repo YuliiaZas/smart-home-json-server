@@ -160,6 +160,36 @@
       "response": []
     },
     {
+      "name": "Rename Dashboard by ID",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer 58ebfdf772a49d09aeee10a8",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"title\": \"Test Dashboard\",\n    \"icon\": \"test\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:3004/api/dashboards/climate/info",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3004",
+          "path": ["api", "dashboards", "climate", "info"]
+        }
+      },
+      "response": []
+    },
+    {
       "name": "Delete Dashboard by ID",
       "request": {
         "method": "DELETE",
