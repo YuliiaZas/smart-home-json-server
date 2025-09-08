@@ -17,12 +17,25 @@ module.exports = (server) => {
     }
   );
 
+  router.get(
+    "/api/devices/user",
+    (req, res, next) => requireAuth(req, res, next, server),
+    (req, res) => {
+      const db = server.db.getState();
+
+      if (!Array.isArray(db.userDevices)) return res.status(404).send("User devices list not found");
+
+      res.json(db.userDevices.filter((ud) => ud.userId === req.user.id));
+    }
+  );
+
   router.patch(
     "/api/devices/:deviceId",
     (req, res, next) => requireAuth(req, res, next, server),
     (req, res) => {
       const { deviceId } = req.params;
       const { state } = req.body;
+      const { user } = req;
 
       if (typeof state !== "boolean") {
         return res.status(400).send("Missing or invalid 'state'");
@@ -44,47 +57,23 @@ module.exports = (server) => {
           .send("Only devices of type 'device' can be updated");
       }
 
-      const updatedDevices = db.devices.map((device) => {
-        if (device.id === deviceId && device.type === "device") {
-          return { ...device, state };
-        }
-        return device;
-      });
+      let userDevices = db.userDevices || [];
 
-      let wasInDashboards = false;
+      const userDeviceIndex = userDevices.findIndex(
+        (ud) => ud.userId === user.id && ud.deviceId === deviceId
+      );
 
-      const updatedDashboards = db.dashboards.map((dashboard) => ({
-        ...dashboard,
-        tabs: Array.isArray(dashboard.tabs)
-          ? dashboard.tabs.map((tab) => ({
-              ...tab,
-              cards: Array.isArray(tab.cards)
-                ? tab.cards.map((card) => ({
-                    ...card,
-                    items: Array.isArray(card.items)
-                      ? card.items.map((item) => {
-                          if (item.id === deviceId && item.type === "device") {
-                            wasInDashboards = true;
-                            return { ...item, state };
-                          }
-                          return item;
-                        })
-                      : [],
-                  }))
-                : [],
-            }))
-          : [],
-      }));
+      if (userDeviceIndex < 0) {
+        return res.status(404).send("Device not found among user devices");
+      }
+
+      const updatedDevice = { ...userDevices[idx], state };
+      userDevices[idx] = updatedDevice;
 
       server.db.setState({
         ...db,
-        devices: updatedDevices,
-        dashboards: wasInDashboards ? updatedDashboards : db.dashboards,
+        userDevices,
       });
-
-      const updatedDevice = updatedDevices.find(
-        (d) => d.id === deviceId && d.type === "device"
-      );
 
       res.status(200).json(updatedDevice);
     }

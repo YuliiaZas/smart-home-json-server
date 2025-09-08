@@ -1,20 +1,24 @@
 const express = require("express");
 const router = express.Router();
 const { requireAuth } = require("../utils/auth.utils");
+const { getId } = require("../utils/id.utils");
+const { initUserDevicesForDashboard, removeUserDevicesForDashboard } = require("../utils/user-devices.utils");
+const { transformTabs, resolveDashboard } = require("../utils/dashboards.utils");
 
 module.exports = (server) => {
   const getDb = () => server.db.getState();
-  const getDbDashboards = () => getDb().dashboards;
+  const getDbDashboards = (db) => db.dashboards;
+  const getDbDevices = (db) => db.devices;
+  const getDbUserDevices = (db) => db.userDevices;
 
   router.get(
     "/api/dashboards",
     (req, res, next) => requireAuth(req, res, next, server),
     (req, res) => {
-      const dashboards = getDbDashboards().map(({ id, title, icon }) => ({
-        id,
-        title,
-        icon,
-      }));
+      const db = getDb();
+      const dashboards = getDbDashboards(db)
+        .filter((d) => d.ownerUserId === req.user.id)
+        .map(({ id, title, icon }) => ({ id, title, icon, }));
       res.json(dashboards);
     }
   );
@@ -23,40 +27,30 @@ module.exports = (server) => {
     "/api/dashboards",
     (req, res, next) => requireAuth(req, res, next, server),
     (req, res) => {
-      const { id, title, icon } = req.body;
+      const { title, icon } = req.body;
 
       if (
-        typeof id !== "string" ||
         typeof title !== "string" ||
         typeof icon !== "string" ||
-        !id.trim() ||
         !title.trim() ||
         !icon.trim()
       ) {
-        return res
-          .status(400)
-          .send("Missing or invalid 'id', 'title' or 'icon'");
+        return res.status(400).send("Missing or invalid 'title' or 'icon'");
       }
 
       const db = getDb();
-      const dashboards = db.dashboards;
-
-      const exists = dashboards.some((d) => d.id === id);
-      if (exists) {
-        return res.status(400).send("Dashboard with this ID already exists");
-      }
 
       const newDashboard = {
-        id,
+        id: getId('d'),
+        ownerUserId: req.user.id,
         title,
         icon,
+        tabs: [],
       };
-
-      const updatedDashboards = [...dashboards, newDashboard];
 
       server.db.setState({
         ...db,
-        dashboards: updatedDashboards,
+        dashboards: [...getDbDashboards(db), newDashboard],
       });
 
       res.status(201).json(newDashboard);
@@ -68,89 +62,57 @@ module.exports = (server) => {
     (req, res, next) => requireAuth(req, res, next, server),
     (req, res) => {
       const { dashboardId } = req.params;
-      const dashboard = getDbDashboards().find((d) => d.id === dashboardId);
+      const db = getDb();
+      const dashboard = getDbDashboards(db).find((d) => d.id === dashboardId && d.ownerUserId === req.user.id);
 
-      if (!dashboard) {
-        return res.status(404).send("Dashboard not found");
-      }
+      if (!dashboard) return res.status(404).send("Dashboard not found");
 
-      res.json({ tabs: dashboard.tabs || [] });
+      res.json(resolveDashboard({
+        dashboard,
+        userId: req.user.id,
+        devices: getDbDevices(db),
+        userDevices: getDbUserDevices(db)
+      }));
     }
   );
 
-  router.put(
+  router.patch(
     "/api/dashboards/:dashboardId",
     (req, res, next) => requireAuth(req, res, next, server),
     (req, res) => {
       const { dashboardId } = req.params;
-      const { tabs } = req.body;
-
-      if (!Array.isArray(tabs)) {
-        return res
-          .status(400)
-          .send("Invalid or missing 'tabs' in request body");
-      }
+      const { tabs, title, icon } = req.body;
 
       const db = getDb();
-      const dashboards = db.dashboards;
+      const dashboards = getDbDashboards(db);
+      const devices = getDbDevices(db);
+      const userDevices = getDbUserDevices(db);
 
-      const found = dashboards.some((d) => d.id === dashboardId);
+      const found = dashboards.find((d) => d.id === dashboardId && d.ownerUserId === req.user.id);
       if (!found) {
         return res.status(404).send("Dashboard not found");
       }
 
-      const updatedDashboards = dashboards.map((dashboard) =>
-        dashboard.id === dashboardId ? { ...dashboard, tabs } : dashboard
-      );
+      const updatedDashboard = {
+        ...found,
+        ...(Array.isArray(tabs) ? { tabs: transformTabs(tabs) } : {}),
+        ...(title ? { title } : {}),
+        ...(icon ? { icon } : {}),
+      };
+
+      const updatedDashboards = dashboards.map((d) => d.id === dashboardId ? updatedDashboard : d);
+
+      const updatedUserDevices = Array.isArray(tabs)
+        ? initUserDevicesForDashboard({tabs, userId: req.user.id, dashboardId, devices, userDevices})
+        : userDevices;
 
       server.db.setState({
         ...db,
         dashboards: updatedDashboards,
+        userDevices: updatedUserDevices,
       });
 
-      const updatedDashboard = updatedDashboards.find(
-        (d) => d.id === dashboardId
-      );
-      res.status(200).json({ tabs: updatedDashboard.tabs });
-    }
-  );
-
-  router.put(
-    "/api/dashboards/:dashboardId/info",
-    (req, res, next) => requireAuth(req, res, next, server),
-    (req, res) => {
-      const { dashboardId } = req.params;
-      const { title, icon } = req.body;
-
-      if (
-        typeof title !== "string" ||
-        typeof icon !== "string" ||
-        !title.trim() ||
-        !icon.trim()
-      ) {
-        return res
-          .status(400)
-          .send("Missing or invalid 'title' or 'icon'");
-      }
-
-      const db = getDb();
-      const dashboards = db.dashboards;
-
-      const found = dashboards.some((d) => d.id === dashboardId);
-      if (!found) {
-        return res.status(404).send("Dashboard not found");
-      }
-
-      const updatedDashboards = dashboards.map((dashboard) =>
-        dashboard.id === dashboardId ? { ...dashboard, title, icon } : dashboard
-      );
-
-      server.db.setState({
-        ...db,
-        dashboards: updatedDashboards,
-      });
-
-      res.status(200).json({ id: dashboardId, title, icon });
+      res.status(200).json(updatedDashboard);
     }
   );
 
@@ -161,18 +123,23 @@ module.exports = (server) => {
       const { dashboardId } = req.params;
 
       const db = getDb();
-      const dashboards = db.dashboards;
+      const dashboards = getDbDashboards(db);
+      const userDevices = getDbUserDevices(db);
 
-      const found = dashboards.some((d) => d.id === dashboardId);
-      if (!found) {
-        return res.status(404).send("Dashboard not found");
-      }
+      const found = dashboards.some((d) => d.id === dashboardId && d.ownerUserId === req.user.id);
+      if (!found) return res.status(404).send("Dashboard not found");
 
       const updatedDashboards = dashboards.filter((d) => d.id !== dashboardId);
+      const updatedUserDevices = removeUserDevicesForDashboard(
+        userDevices,
+        req.user.id,
+        dashboardId
+      );
 
       server.db.setState({
         ...db,
         dashboards: updatedDashboards,
+        userDevices: updatedUserDevices,
       });
 
       res.status(204).send();

@@ -1,0 +1,28 @@
+{
+  "userDevices": [
+    {
+      "userId": "u_1757109491514_javxm",
+      "devices": [
+        {
+          "deviceId": "lock",
+          "state": true,
+          "dashboards": []
+        },
+        {
+          "deviceId": "main-light",
+          "state": true,
+          "dashboards": []
+
+        },
+        {
+          "deviceId": "motion-1",
+          "value": {
+            "amount": false,
+            "unit": null
+          },
+          "dashboards": []
+        }
+      ]
+    }
+  ]
+}
