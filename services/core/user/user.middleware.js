@@ -71,7 +71,7 @@ module.exports = (server) => {
     
     const token = signAccessToken(newUser);
     
-    res.json({ token, dashboardId: userDashboards[0]?.id || null });
+    res.json({ token });
   });
 
   router.post("/api/user/login", async (req, res) => {

@@ -9,9 +9,7 @@ module.exports = (server) => {
     (req, res) => {
       const db = server.db.getState();
 
-      if (!Array.isArray(db.devices)) {
-        return res.status(404).send("Devices list not found");
-      }
+      if (!Array.isArray(db.devices)) return res.status(404).send("Devices list not found");
 
       res.json(db.devices);
     }
@@ -37,9 +35,7 @@ module.exports = (server) => {
       const { state } = req.body;
       const { user } = req;
 
-      if (typeof state !== "boolean") {
-        return res.status(400).send("Missing or invalid 'state'");
-      }
+      if (typeof state !== "boolean") return res.status(400).send("Missing or invalid 'state'");
 
       const db = server.db.getState();
 
@@ -47,32 +43,32 @@ module.exports = (server) => {
         ? db.devices.find((device) => device.id === deviceId)
         : null;
 
-      if (!targetDevice) {
-        return res.status(404).send("Device not found");
-      }
+      if (!targetDevice) return res.status(404).send("Device not found");
 
-      if (targetDevice.type !== "device") {
-        return res
-          .status(400)
-          .send("Only devices of type 'device' can be updated");
-      }
+      if (targetDevice.type !== "device") return res.status(400).send("Only devices of type 'device' can be updated");
+      
+      const userDevicesDB = db.userDevices || [];
+      
+      const userEntry = userDevicesDB.find((ud) => ud.userId === user.id);
+      if (!userEntry) return res.status(404).send("No devices found for this user");
 
-      let userDevices = db.userDevices || [];
+      const userDevice = userEntry.devices.find((device) => device.deviceId === deviceId);
+      if (!userDevice) return res.status(404).send("Device not found among user devices");
 
-      const userDeviceIndex = userDevices.findIndex(
-        (ud) => ud.userId === user.id && ud.deviceId === deviceId
+      const updatedDevice = { ...userDevice, state };
+
+      const updatedUserDevices = userDevicesDB.map((ud) =>
+        ud.userId === user.id
+          ? {
+              ...ud,
+              devices: ud.devices.map((d) => d.deviceId === deviceId ? updatedDevice : d),
+            }
+          : ud
       );
-
-      if (userDeviceIndex < 0) {
-        return res.status(404).send("Device not found among user devices");
-      }
-
-      const updatedDevice = { ...userDevices[idx], state };
-      userDevices[idx] = updatedDevice;
 
       server.db.setState({
         ...db,
-        userDevices,
+        userDevices: updatedUserDevices,
       });
 
       res.status(200).json(updatedDevice);

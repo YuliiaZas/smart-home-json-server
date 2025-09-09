@@ -1,7 +1,7 @@
 {
   "dashboards": [
     {
-      "id": "d_1757109611291_sl6j1",
+      "id": "ud_1757369316955_sstx0",
       "ownerUserId": "u_1757109491514_javxm",
       "title": "Overview",
       "icon": "home",
@@ -145,7 +145,7 @@
       ]
     },
     {
-      "id": "d_1757109623395_4seqy",
+      "id": "ud_1757369316955_7gg86",
       "ownerUserId": "u_1757109491514_javxm",
       "title": "Electricity",
       "icon": "bolt",
@@ -193,8 +193,8 @@
       ]
     },
     {
-      "id": "d_1757109630672_c0wpc",
-      "ownerUserId": "u_1757109565540_xdzsm",
+      "id": "ud_1757369316955_n34v6",
+      "ownerUserId": "u_1757109491514_javxm",
       "title": "Climate",
       "icon": "device_thermostat",
       "tabs": [
@@ -237,8 +237,8 @@
       ]
     },
     {
-      "id": "d_1757109638967_o2p0u",
-      "ownerUserId": "u_1757109565540_xdzsm",
+      "id": "ud_1757369316955_k9tie",
+      "ownerUserId": "u_1757109491514_javxm",
       "title": "Security",
       "icon": "shield",
       "tabs": [
@@ -302,70 +302,25 @@
               "id": "balcony-weather",
               "title": "Balcony",
               "layout": "horizontalLayout",
-              "items": [
-                {
-                  "type": "deviceRef",
-                  "deviceId": "temperature-outside"
-                },
-                {
-                  "type": "deviceRef",
-                  "deviceId": "humidity-outside"
-                },
-                {
-                  "type": "deviceRef",
-                  "deviceId": "weather"
-                }
-              ]
+              "itemIds": [ "temperature-outside", "humidity-outside", "weather" ]
             },
             {
               "id": "indoor-rooms",
               "title": "Rooms",
               "layout": "verticalLayout",
-              "items": [
-                {
-                  "type": "deviceRef",
-                  "deviceId": "co2-1",
-                  "alias": { "label": "CO2 1st Floor", "icon": "co2" }
-                },
-                {
-                  "type": "deviceRef",
-                  "deviceId": "humidity-1"
-                }
-              ]
+              "itemIds": [ "co2-1", "humidity-1" ]
             },
             {
               "id": "motion",
               "title": "",
               "layout": "singleDevice",
-              "items": [
-                {
-                  "type": "deviceRef",
-                  "deviceId": "motion-outside"
-                }
-              ]
+              "itemIds": [ "motion-outside" ]
             },
             {
               "id": "living-room-mixed",
               "title": "Living Room",
               "layout": "verticalLayout",
-              "items": [
-                {
-                  "type": "deviceRef",
-                  "deviceId": "floor-lamp"
-                },
-                {
-                  "type": "deviceRef",
-                  "deviceId": "tv"
-                },
-                {
-                  "type": "deviceRef",
-                  "deviceId": "temperature-1"
-                },
-                {
-                  "type": "deviceRef",
-                  "deviceId": "co2-1"
-                }
-              ]
+              "itemIds": [ "floor-lamp", "tv", "temperature-1", "co2-1" ]
             }
           ]
         },
@@ -377,56 +332,112 @@
               "id": "kitchen-light",
               "title": "Kitchen",
               "layout": "singleDevice",
-              "items": [
-                {
-                  "type": "deviceRef",
-                  "deviceId": "ceiling-light-kitchen"
-                }
-              ]
+              "itemIds": [ "ceiling-light-kitchen" ]
             },
             {
               "id": "corridor-light",
               "title": "Corridor",
               "layout": "singleDevice",
-              "items": [
-                {
-                  "type": "deviceRef",
-                  "deviceId": "main-light"
-                }
-              ]
+              "itemIds": [ "main-light" ]
             },
             {
               "id": "living-room-light",
               "title": "Living Room",
               "layout": "singleDevice",
-              "items": [
-                {
-                 "type": "deviceRef",
-                  "deviceId": "floor-lamp"
-                }
-              ]
+              "itemIds": [ "floor-lamp" ]
             },
             {
               "id": "bedroom-light",
               "title": "Bedroom",
               "layout": "singleDevice",
-              "items": [
-                {
-                 "type": "deviceRef",
-                  "deviceId": "ceiling-light-master-bedroom"
-                }
-              ]
+              "itemIds": [ "ceiling-light-master-bedroom" ]
             },
             {
               "id": "basement-light",
               "title": "Basement",
               "layout": "singleDevice",
-              "items": [
-                {
-                  "type": "deviceRef",
-                  "deviceId": "basement-light"
-                }
-              ]
+              "itemIds": [ "basement-light" ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "tpl_default_lights",
+      "title": "Electricity",
+      "icon": "bolt",
+      "tabs": [
+        {
+          "id": "usage",
+          "title": "Current Usage",
+          "cards": [
+            {
+              "id": "meter-status",
+              "title": "Electric Meter",
+              "layout": "horizontalLayout",
+              "itemIds": [ "power-total", "peak-hour" ]
+            },
+            {
+              "id": "usage-breakdown",
+              "title": "Appliance Breakdown",
+              "layout": "verticalLayout",
+              "itemIds": [ "power-living-room", "power-kitchen", "power-heater" ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "tpl_default_climate",
+      "title": "Climate",
+      "icon": "device_thermostat",
+      "tabs": [
+        {
+          "id": "inside",
+          "title": "Indoor",
+          "cards": [
+            {
+              "id": "climate-bedroom",
+              "title": "Bedroom",
+              "layout": "singleDevice",
+              "itemIds": [ "temperature-2", "humidity-0" ]
+            },
+            {
+              "id": "climate-kitchen",
+              "title": "Kitchen",
+              "layout": "singleDevice",
+              "itemIds": [ "temperature-1", "co2-1" ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "tpl_default_security",
+      "title": "Security",
+      "icon": "shield",
+      "tabs": [
+        {
+          "id": "home-security",
+          "title": "Home",
+          "cards": [
+            {
+              "id": "entrance-door",
+              "title": "Entrance",
+              "layout": "singleDevice",
+              "itemIds": [ "lock" ]
+            },
+            {
+              "id": "camera-zone1",
+              "title": "Camera Zone 1",
+              "layout": "verticalLayout",
+              "itemIds": [ "camera", "motion-1" ]
+            },
+            {
+              "id": "alarm-status",
+              "title": "Alarm",
+              "layout": "singleDevice",
+              "itemIds": [ "alarm" ]
             }
           ]
         }

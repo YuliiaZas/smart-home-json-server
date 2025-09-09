@@ -112,7 +112,12 @@ module.exports = (server) => {
         userDevices: updatedUserDevices,
       });
 
-      res.status(200).json(updatedDashboard);
+      res.status(200).json(resolveDashboard({
+        dashboard: updatedDashboard,
+        userId: req.user.id,
+        devices: devices,
+        userDevices: updatedUserDevices
+      }));
     }
   );
 
