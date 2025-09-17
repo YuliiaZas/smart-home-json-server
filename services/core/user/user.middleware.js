@@ -5,7 +5,7 @@ const { signAccessToken } = require("../utils/auth.jwt.utils");
 const { requireAuth } = require("../utils/auth.utils");
 const { getId } = require("../utils/id.utils");
 const { initUserDevicesForDashboard } = require("../utils/user-devices.utils");
-
+const { transformTabs } = require("../utils/dashboards.utils");
 
 module.exports = (server) => {
   function getInitials(name) {
@@ -23,7 +23,7 @@ module.exports = (server) => {
     const db = server.db.getState();
     const exists = db.users.some((u) => u.userName.toLowerCase() === userName.toLowerCase());
 
-    if (exists) return res.status(400).send("User already exists");
+    if (exists) return res.status(409).send("User already exists");
 
     const hash = await bcrypt.hash(password, 10);
     const newUser = {
@@ -45,8 +45,9 @@ module.exports = (server) => {
     const templates = db.dashboardTemplates || [];
     const userDashboards = templates.map((tpl) => ({
       ...tpl,
-      ownerUserId: newUser.id,
       id: getId('ud'),
+      ownerUserId: newUser.id,
+      tabs: transformTabs(tpl.tabs || [])
     }));
     const dashboards = [ ...db.dashboards, ...userDashboards ];
 
