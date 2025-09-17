@@ -1,0 +1,180 @@
+{
+  "userDevices": [
+    {
+      "userId": "u_1757109491514_javxm",
+      "devices": [
+        {
+          "deviceId": "temperature-outside",
+          "dashboards": [ "ud_1757369316955_sstx0" ],
+          "value": {
+            "amount": 18.5,
+            "unit": "°C"
+          }
+        },
+        {
+          "deviceId": "humidity-outside",
+          "dashboards": [ "ud_1757369316955_sstx0" ],
+          "value": {
+            "amount": 72,
+            "unit": "%"
+          }
+        },
+        {
+          "deviceId": "weather",
+          "dashboards": [ "ud_1757369316955_sstx0" ],
+          "value": {
+            "amount": "clear",
+            "unit": null
+          }
+        },
+        {
+          "deviceId": "co2-1",
+          "dashboards": [
+            "ud_1757369316955_sstx0",
+            "ud_1757369316955_n34v6"
+          ],
+          "value": {
+            "amount": 520,
+            "unit": "ppm"
+          }
+        },
+        {
+          "deviceId": "humidity-1",
+          "dashboards": [ "ud_1757369316955_sstx0" ],
+          "value": {
+            "amount": 45,
+            "unit": "%"
+          }
+        },
+        {
+          "deviceId": "motion-outside",
+          "dashboards": [ "ud_1757369316955_sstx0" ],
+          "value": {
+            "amount": true,
+            "unit": null
+          }
+        },
+        {
+          "deviceId": "floor-lamp",
+          "dashboards": [ "ud_1757369316955_sstx0" ],
+          "state": true
+        },
+        {
+          "deviceId": "tv",
+          "dashboards": [ "ud_1757369316955_sstx0" ],
+          "state": false
+        },
+        {
+          "deviceId": "temperature-1",
+          "dashboards": [
+            "ud_1757369316955_sstx0",
+            "ud_1757369316955_n34v6"
+          ],
+          "value": {
+            "amount": 23.5,
+            "unit": "°C"
+          }
+        },
+        {
+          "deviceId": "ceiling-light-kitchen",
+          "dashboards": [ "ud_1757369316955_sstx0" ],
+          "state": true
+        },
+        {
+          "deviceId": "main-light",
+          "dashboards": [ "ud_1757369316955_sstx0" ],
+          "state": true
+        },
+        {
+          "deviceId": "ceiling-light-master-bedroom",
+          "dashboards": [ "ud_1757369316955_sstx0" ],
+          "state": false
+        },
+        {
+          "deviceId": "basement-light",
+          "dashboards": [ "ud_1757369316955_sstx0" ],
+          "state": true
+        },
+        {
+          "deviceId": "power-total",
+          "dashboards": [ "ud_1757369316955_7gg86" ],
+          "value": {
+            "amount": 2.5,
+            "unit": "kWh"
+          }
+        },
+        {
+          "deviceId": "peak-hour",
+          "dashboards": [ "ud_1757369316955_7gg86" ],
+          "value": {
+            "amount": true,
+            "unit": null
+          }
+        },
+        {
+          "deviceId": "power-living-room",
+          "dashboards": [ "ud_1757369316955_7gg86" ],
+          "value": {
+            "amount": 0.8,
+            "unit": "kWh"
+          }
+        },
+        {
+          "deviceId": "power-kitchen",
+          "dashboards": [ "ud_1757369316955_7gg86" ],
+          "value": {
+            "amount": 0.5,
+            "unit": "kWh"
+          }
+        },
+        {
+          "deviceId": "power-heater",
+          "dashboards": [ "ud_1757369316955_7gg86" ],
+          "value": {
+            "amount": 1.2,
+            "unit": "kWh"
+          }
+        },
+        {
+          "deviceId": "temperature-2",
+          "dashboards": [ "ud_1757369316955_n34v6" ],
+          "value": {
+            "amount": 21,
+            "unit": "°C"
+          }
+        },
+        {
+          "deviceId": "humidity-0",
+          "dashboards": [ "ud_1757369316955_n34v6" ],
+          "value": {
+            "amount": 40,
+            "unit": "%"
+          }
+        },
+        {
+          "deviceId": "lock",
+          "dashboards": [ "ud_1757369316955_k9tie" ],
+          "state": true
+        },
+        {
+          "deviceId": "camera",
+          "dashboards": [ "ud_1757369316955_k9tie" ],
+          "state": true
+        },
+        {
+          "deviceId": "motion-1",
+          "dashboards": [ "ud_1757369316955_k9tie" ],
+          "value": {
+            "amount": false,
+            "unit": null
+          }
+        },
+        {
+          "deviceId": "alarm",
+          "dashboards": [ "ud_1757369316955_k9tie" ],
+          "state": false
+        }
+      ]
+    }
+  ]
+}
