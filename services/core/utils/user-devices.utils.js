@@ -2,7 +2,7 @@ function initUserDevicesForDashboard({ tabs, userId, dashboardId, devices, userD
   const actualDeviceIdsInTabs = new Set();
   (tabs || []).forEach((tab) =>
     (tab.cards || []).forEach((card) =>
-      (card.itemIds || []).forEach((deviceId) => actualDeviceIdsInTabs.add(deviceId))
+      (card.items || []).forEach((item) => actualDeviceIdsInTabs.add(item.deviceId))
     )
   );
 

@@ -93,9 +93,11 @@ module.exports = (server) => {
         return res.status(404).send("Dashboard not found");
       }
 
+      const updatedTabs = Array.isArray(tabs) ? { tabs: transformTabs(tabs) } : {};
+
       const updatedDashboard = {
         ...found,
-        ...(Array.isArray(tabs) ? { tabs: transformTabs(tabs) } : {}),
+        ...updatedTabs,
         ...(title ? { title } : {}),
         ...(icon ? { icon } : {}),
       };
@@ -103,7 +105,7 @@ module.exports = (server) => {
       const updatedDashboards = dashboards.map((d) => d.id === dashboardId ? updatedDashboard : d);
 
       const updatedUserDevices = Array.isArray(tabs)
-        ? initUserDevicesForDashboard({tabs, userId: req.user.id, dashboardId, devices, userDevices})
+        ? initUserDevicesForDashboard({tabs: updatedTabs.tabs, userId: req.user.id, dashboardId, devices, userDevices})
         : userDevices;
 
       server.db.setState({
